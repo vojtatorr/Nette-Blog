@@ -57,9 +57,11 @@ final class Template_f4fa3aae0a extends Latte\Runtime\Template
 			echo LR\Filters::escapeHtmlText(($this->filters->date)($post->created_at, 'F j, Y')) /* line 6 */;
 			echo '</div>
 
-		<h2>';
+		<h2><a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:show', [$post->id])) /* line 8 */;
+			echo '">';
 			echo LR\Filters::escapeHtmlText($post->title) /* line 8 */;
-			echo '</h2>
+			echo '</a></h2>
 
 		<div>';
 			echo LR\Filters::escapeHtmlText(($this->filters->truncate)($post->content, 256)) /* line 10 */;

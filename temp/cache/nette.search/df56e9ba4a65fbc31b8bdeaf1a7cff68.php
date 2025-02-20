@@ -10,7 +10,7 @@ return array (
     'App\\Core\\RouterFactory' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Core\\RouterFactory.php',
-      1 => 1738539948,
+      1 => 1740066272,
     ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
@@ -30,7 +30,12 @@ return array (
     'App\\Presentation\\Home\\HomePresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Home\\HomePresenter.php',
-      1 => 1739986063,
+      1 => 1740065285,
+    ),
+    'App\\Presentation\\Post\\PostPresenter' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Post\\PostPresenter.php',
+      1 => 1740067027,
     ),
   ),
   1 => 

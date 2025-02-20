@@ -6,6 +6,7 @@ namespace App\Presentation\Home;
 
 use Nette;
 use Nette\Database\Explorer;
+use Nettey\Application\UI\Presenter;
 
 final class HomePresenter extends Nette\Application\UI\Presenter
 {
