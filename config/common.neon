@@ -2,6 +2,7 @@ parameters:
 
 
 application:
+	# catchExceptions: true
 	errorPresenter:
 		4xx: Error:Error4xx
 		5xx: Error:Error5xx
@@ -9,9 +10,9 @@ application:
 
 
 database:
-	dsn: 'sqlite::memory:'
-	user:
-	password:
+    dsn: 'mysql:host=127.0.0.1;port=3306;dbname=default_news'
+    user: 'root'
+    password: 'root'
 
 
 latte:
