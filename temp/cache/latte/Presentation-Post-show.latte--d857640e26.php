@@ -35,20 +35,27 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 		unset($ʟ_args);
 
 		echo '
-<p><a href="';
+    <p><a href="';
 		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Home:default')) /* line 3 */;
 		echo '">← zpět na výpis příspěvků</a></p>
 
-<div class="date">';
+    <div class="date">';
 		echo LR\Filters::escapeHtmlText(($this->filters->date)($post->created_at, 'F j, Y')) /* line 5 */;
 		echo '</div>
 
 ';
 		$this->renderBlock('title', get_defined_vars()) /* line 7 */;
 		echo '
-<div class="post">';
+    <div class="post">';
 		echo LR\Filters::escapeHtmlText($post->content) /* line 9 */;
-		echo '</div>';
+		echo '</div>
+
+    <h2>Vložte nový komentář</h2>
+
+';
+		$ʟ_tmp = $this->global->uiControl->getComponent('commentForm');
+		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
+		$ʟ_tmp->render() /* line 13 */;
 	}
 
 
@@ -59,7 +66,7 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 		extract($ʟ_args);
 		unset($ʟ_args);
 
-		echo '<h1>';
+		echo '    <h1>';
 		echo LR\Filters::escapeHtmlText($post->title) /* line 7 */;
 		echo '</h1>
 ';
