@@ -78,9 +78,34 @@ protected function createComponentPostForm(): Form
 
 private function postFormSucceeded(Form $form, array $values): void
 {
-	$post = $this->db->table('post')->insert($values);
+	$postId = $this->getParameter("postId");
+
+	if ($postId) {
+		$post = $this->db
+			->table('post')
+			->get($postId);
+		$post->update($values);
+
+	} else {
+		$post = $this->db
+			->table('post')
+			->insert($values);
+	}
 
 	$this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
 	$this->redirect('Post:show', $post->id);
+}
+
+public function actionEdit(int $postId): void
+{
+	$post = $this->db
+		->table('post')
+		->get($postId);
+
+	if (!$post) {
+		$this->error('Post not found');
+	}
+
+	$this['postForm']->setDefaults($post->toArray());
 }
 }

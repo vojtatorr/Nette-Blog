@@ -32,7 +32,7 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['comment' => '18'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['comment' => '20'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}
@@ -59,8 +59,12 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 ';
 		$this->renderBlock('title', get_defined_vars()) /* line 7 */;
 		echo '
+    <a href="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:edit', [$post->id])) /* line 9 */;
+		echo '">Upravit příspěvek</a>
+
     <div class="post">';
-		echo LR\Filters::escapeHtmlText($post->content) /* line 9 */;
+		echo LR\Filters::escapeHtmlText($post->content) /* line 11 */;
 		echo '</div>
 
     <h2>Vložte nový komentář</h2>
@@ -68,29 +72,29 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 ';
 		$ʟ_tmp = $this->global->uiControl->getComponent('commentForm');
 		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
-		$ʟ_tmp->render() /* line 13 */;
+		$ʟ_tmp->render() /* line 15 */;
 
 		echo '
     <h2>Komentáře</h2>
 
     <div class="comments">
 ';
-		foreach ($comments as $comment) /* line 18 */ {
+		foreach ($comments as $comment) /* line 20 */ {
 			echo '            <p>
                 <b>
                     ';
 			$ʟ_tag[0] = '';
-			if ($comment->email) /* line 21 */ {
+			if ($comment->email) /* line 23 */ {
 				echo '<';
-				echo $ʟ_tmp = 'a' /* line 21 */;
+				echo $ʟ_tmp = 'a' /* line 23 */;
 				$ʟ_tag[0] = '</' . $ʟ_tmp . '>' . $ʟ_tag[0];
 				echo ' href="mailto:';
-				echo LR\Filters::escapeHtmlAttr($comment->email) /* line 21 */;
+				echo LR\Filters::escapeHtmlAttr($comment->email) /* line 23 */;
 				echo '">';
 			}
 			echo '
                 ';
-			echo LR\Filters::escapeHtmlText($comment->name) /* line 22 */;
+			echo LR\Filters::escapeHtmlText($comment->name) /* line 24 */;
 			echo '
                     ';
 			echo $ʟ_tag[0];
@@ -99,7 +103,7 @@ final class Template_d857640e26 extends Latte\Runtime\Template
             </p>
 
             <div>';
-			echo LR\Filters::escapeHtmlText($comment->content) /* line 27 */;
+			echo LR\Filters::escapeHtmlText($comment->content) /* line 29 */;
 			echo '</div>
 ';
 
