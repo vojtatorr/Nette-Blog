@@ -24,6 +24,7 @@ class PostPresenter extends Presenter
 		$this->template->post = $this->db
 			->table('post')
 			->get($postId);
+		$this->template->comments = $post->related('comment')->order("created_at");
 		
 	}
 
@@ -40,7 +41,24 @@ class PostPresenter extends Presenter
 			->setRequired();
 	
 		$form->addSubmit('send', 'Publikovat komentář');
+
+		$form->onSuccess[] = [$this, 'commentFormSucceeded'];
 	
 		return $form;
 	}
+
+	public function commentFormSucceeded(Form $form, \stdClass $values): void
+{
+	$postId = $this->getParameter('postId');
+
+	$this->db->table('comment')->insert([
+		'post_id' => $postId,
+		'name' => $values->name,
+		'email' => $values->email,
+		'content' => $values->content,
+	]);
+
+	$this->flashMessage('Děkuji za komentář', 'success');
+	$this->redirect('this');
+}
 }

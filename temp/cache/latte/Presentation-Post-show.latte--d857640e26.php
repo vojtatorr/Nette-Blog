@@ -27,6 +27,19 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 	}
 
 
+	public function prepare(): array
+	{
+		extract($this->params);
+
+		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
+			foreach (array_intersect_key(['comment' => '18'], $this->params) as $ʟ_v => $ʟ_l) {
+				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
+			}
+		}
+		return get_defined_vars();
+	}
+
+
 	/** {block content} on line 1 */
 	public function blockContent(array $ʟ_args): void
 	{
@@ -56,6 +69,44 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 		$ʟ_tmp = $this->global->uiControl->getComponent('commentForm');
 		if ($ʟ_tmp instanceof Nette\Application\UI\Renderable) $ʟ_tmp->redrawControl(null, false);
 		$ʟ_tmp->render() /* line 13 */;
+
+		echo '
+    <h2>Komentáře</h2>
+
+    <div class="comments">
+';
+		foreach ($comments as $comment) /* line 18 */ {
+			echo '            <p>
+                <b>
+                    ';
+			$ʟ_tag[0] = '';
+			if ($comment->email) /* line 21 */ {
+				echo '<';
+				echo $ʟ_tmp = 'a' /* line 21 */;
+				$ʟ_tag[0] = '</' . $ʟ_tmp . '>' . $ʟ_tag[0];
+				echo ' href="mailto:';
+				echo LR\Filters::escapeHtmlAttr($comment->email) /* line 21 */;
+				echo '">';
+			}
+			echo '
+                ';
+			echo LR\Filters::escapeHtmlText($comment->name) /* line 22 */;
+			echo '
+                    ';
+			echo $ʟ_tag[0];
+			echo '
+                </b> napsal:
+            </p>
+
+            <div>';
+			echo LR\Filters::escapeHtmlText($comment->content) /* line 27 */;
+			echo '</div>
+';
+
+		}
+
+		echo '    </div>
+';
 	}
 
 
