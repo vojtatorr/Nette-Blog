@@ -35,7 +35,7 @@ return array (
     'App\\Presentation\\Post\\PostPresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Post\\PostPresenter.php',
-      1 => 1740147756,
+      1 => 1740152950,
     ),
   ),
   1 => 
@@ -49,8 +49,11 @@ return array (
     'App\\Presentation\\Post\\Explorer' => 3,
     'App\\Presentation\\Home\\HomeDefaultTemplate' => 3,
     'App\\Presentation\\Home\\HomeTemplate' => 3,
+    'App\\Presentation\\Post\\PostCreateTemplate' => 3,
+    'App\\Presentation\\Post\\From' => 1,
   ),
   2 => 
   array (
+    'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Edit\\editPresenter.php' => 1740152596,
   ),
 );

@@ -32,7 +32,7 @@ final class Template_f4fa3aae0a extends Latte\Runtime\Template
 		extract($this->params);
 
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === 'extends') {
-			foreach (array_intersect_key(['post' => '5'], $this->params) as $ʟ_v => $ʟ_l) {
+			foreach (array_intersect_key(['post' => '6'], $this->params) as $ʟ_v => $ʟ_l) {
 				trigger_error("Variable \$$ʟ_v overwritten in foreach on line $ʟ_l");
 			}
 		}
@@ -48,23 +48,26 @@ final class Template_f4fa3aae0a extends Latte\Runtime\Template
 		unset($ʟ_args);
 
 		$this->renderBlock('title', get_defined_vars()) /* line 2 */;
-		echo '
+		echo '	<a href="';
+		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:create')) /* line 3 */;
+		echo '">Napsat nový příspěvek</a>
+
 
 ';
-		foreach ($posts as $post) /* line 5 */ {
+		foreach ($posts as $post) /* line 6 */ {
 			echo '	<div class="post">
 		<div class="date">';
-			echo LR\Filters::escapeHtmlText(($this->filters->date)($post->created_at, 'F j, Y')) /* line 6 */;
+			echo LR\Filters::escapeHtmlText(($this->filters->date)($post->created_at, 'F j, Y')) /* line 7 */;
 			echo '</div>
 
 		<h2><a href="';
-			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:show', [$post->id])) /* line 8 */;
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:show', [$post->id])) /* line 9 */;
 			echo '">';
-			echo LR\Filters::escapeHtmlText($post->title) /* line 8 */;
+			echo LR\Filters::escapeHtmlText($post->title) /* line 9 */;
 			echo '</a></h2>
 
 		<div>';
-			echo LR\Filters::escapeHtmlText(($this->filters->truncate)($post->content, 256)) /* line 10 */;
+			echo LR\Filters::escapeHtmlText(($this->filters->truncate)($post->content, 256)) /* line 11 */;
 			echo '</div>
 	</div>
 ';
