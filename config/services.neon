@@ -1,6 +1,7 @@
 services:
 	- App\Core\RouterFactory::createRouter
 	- App\Model\PostManager
+	- App\Model\CommentManager
 
 
 search:

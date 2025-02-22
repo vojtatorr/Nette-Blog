@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\Presentation\Post;
 
 use Nette\Application\UI\Presenter;
-use Nette\Database\Explorer;
+use App\Model\PostManager;
+use App\Model\CommentManager;
 use Nette\Application\UI\Form;
 
 class PostPresenter extends Presenter
 {
     public function __construct(
-        private Explorer $db,
+        private PostManager $postManager,
+		private CommentManager $commentManager,
     ) { }
 
 	public function actionCreate(){
@@ -19,17 +21,32 @@ class PostPresenter extends Presenter
 		$this->redirect('Sign:in');
 	}
 
+	public function actionEdit(int $postId): void
+{
+	if (!$this->getUser()->isLoggedIn()){
+		$this->flashMessage("Pro tuto akci je nutné se přihlásit", "error");
+		$this->redirect("Sign:in");
+	}
+
+	$post = $this->postManager->getById($postId);
+
+	if (!$post) {
+		$this->error('Post not found', 404);
+	}
+
+	$this['postForm']->setDefaults($post->toArray());
+}
+
     public function renderShow(int $postId): void
 	{
-		$post = $this->db->table('post')->get($postId);
+		$post = $this->postManager->getById($postId);
 
 		if(!$post){
 			$this->error('Omlováme se, ale Vámi zvolený příspěvěk neexistuje!!!', 404);
 		}
-		$this->template->post = $this->db
-			->table('post')
-			->get($postId);
-		$this->template->comments = $post->related('comment')->order("created_at");
+
+		$this->template->post = $post;
+		$this->template->comments = $this->commentManager->getCommentsByPostId($postId);
 		
 	}
 
@@ -56,7 +73,7 @@ class PostPresenter extends Presenter
 {
 	$postId = $this->getParameter('postId');
 
-	$this->db->table('comment')->insert([
+	$this->commentManager->insert([
 		'post_id' => $postId,
 		'name' => $values->name,
 		'email' => $values->email,
@@ -90,36 +107,15 @@ private function postFormSucceeded(Form $form, array $values): void
 	$postId = $this->getParameter("postId");
 
 	if ($postId) {
-		$post = $this->db
-			->table('post')
-			->get($postId);
+		$post = $this->postManager->getById($postId);
 		$post->update($values);
 
 	} else {
-		$post = $this->db
-			->table('post')
-			->insert($values);
+		$post = $this->postManager->insert($values);
 	}
 
 	$this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
 	$this->redirect('Post:show', $post->id);
 }
 
-public function actionEdit(int $postId): void
-{
-	if (!$this->getUser()->isLoggedIn()){
-		$this->flashMessage("Pro tuto akci je nutné se přihlásit", "error");
-		$this->redirect("Sign:in");
-	}
-
-	$post = $this->db
-		->table('post')
-		->get($postId);
-
-	if (!$post) {
-		$this->error('Post not found');
-	}
-
-	$this['postForm']->setDefaults($post->toArray());
-}
 }
