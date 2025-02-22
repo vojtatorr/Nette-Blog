@@ -35,7 +35,7 @@ return array (
     'App\\Presentation\\Post\\PostPresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Post\\PostPresenter.php',
-      1 => 1740156304,
+      1 => 1740228998,
     ),
     'App\\Presentation\\Sign\\SignPresenter' => 
     array (
@@ -57,10 +57,10 @@ return array (
     'App\\Presentation\\Post\\PostCreateTemplate' => 3,
     'App\\Presentation\\Post\\From' => 1,
     'App\\Presentation\\Post\\PostEditTemplate' => 3,
-    'App\\Presentation\\Sign\\SignInTemplate' => 2,
+    'App\\Presentation\\Sign\\SignInTemplate' => 3,
     'App\\Presentation\\Sign\\SignTemplate' => 3,
     'App\\Presentation\\Sing\\SingPresenter' => 3,
-    'App\\Presentation\\Sign\\SignOutTemplate' => 2,
+    'App\\Presentation\\Sign\\SignOutTemplate' => 3,
     'App\\Presentation\\Homepage\\HomepagePresenter' => 1,
   ),
   2 => 

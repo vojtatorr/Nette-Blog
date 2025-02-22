@@ -14,6 +14,11 @@ class PostPresenter extends Presenter
         private Explorer $db,
     ) { }
 
+	public function actionCreate(){
+		$this->flashMessage('Pro tuto akci je nutné se přihlásit.', 'error');
+		$this->redirect('Sign:in');
+	}
+
     public function renderShow(int $postId): void
 	{
 		$post = $this->db->table('post')->get($postId);
@@ -78,6 +83,10 @@ protected function createComponentPostForm(): Form
 
 private function postFormSucceeded(Form $form, array $values): void
 {
+	if (!$this->getUser()->isLoggedIn()){
+		$this->error("Pro tuto akci je nutné se přihlásit");
+	}
+
 	$postId = $this->getParameter("postId");
 
 	if ($postId) {
@@ -98,6 +107,11 @@ private function postFormSucceeded(Form $form, array $values): void
 
 public function actionEdit(int $postId): void
 {
+	if (!$this->getUser()->isLoggedIn()){
+		$this->flashMessage("Pro tuto akci je nutné se přihlásit", "error");
+		$this->redirect("Sign:in");
+	}
+
 	$post = $this->db
 		->table('post')
 		->get($postId);

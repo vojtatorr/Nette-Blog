@@ -58,11 +58,14 @@ final class Template_d857640e26 extends Latte\Runtime\Template
 
 ';
 		$this->renderBlock('title', get_defined_vars()) /* line 7 */;
+		echo "\n";
+		if ($user->isLoggedIn()) /* line 9 */ {
+			echo '    <a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:edit', [$post->id])) /* line 9 */;
+			echo '">Upravit příspěvek</a>
+';
+		}
 		echo '
-    <a href="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:edit', [$post->id])) /* line 9 */;
-		echo '">Upravit příspěvek</a>
-
     <div class="post">';
 		echo LR\Filters::escapeHtmlText($post->content) /* line 11 */;
 		echo '</div>

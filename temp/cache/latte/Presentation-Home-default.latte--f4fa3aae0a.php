@@ -48,10 +48,13 @@ final class Template_f4fa3aae0a extends Latte\Runtime\Template
 		unset($ʟ_args);
 
 		$this->renderBlock('title', get_defined_vars()) /* line 2 */;
-		echo '	<a href="';
-		echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:create')) /* line 3 */;
-		echo '">Napsat nový příspěvek</a>
-
+		if ($user->isLoggedIn()) /* line 3 */ {
+			echo '	<a href="';
+			echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link('Post:create')) /* line 3 */;
+			echo '">Napsat nový příspěvek</a>
+';
+		}
+		echo '
 
 ';
 		foreach ($posts as $post) /* line 6 */ {
