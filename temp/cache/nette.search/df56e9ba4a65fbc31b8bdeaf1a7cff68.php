@@ -35,7 +35,12 @@ return array (
     'App\\Presentation\\Post\\PostPresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Post\\PostPresenter.php',
-      1 => 1740156157,
+      1 => 1740156304,
+    ),
+    'App\\Presentation\\Sign\\SignPresenter' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Sign\\SignPresenter.php',
+      1 => 1740225456,
     ),
   ),
   1 => 
