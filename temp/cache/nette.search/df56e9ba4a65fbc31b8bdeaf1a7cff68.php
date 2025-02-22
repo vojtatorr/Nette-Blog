@@ -12,6 +12,11 @@ return array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Core\\RouterFactory.php',
       1 => 1740066272,
     ),
+    'App\\Model\\PostManager' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Model\\PostManager.php',
+      1 => 1740234739,
+    ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Accessory\\LatteExtension.php',
@@ -30,12 +35,12 @@ return array (
     'App\\Presentation\\Home\\HomePresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Home\\HomePresenter.php',
-      1 => 1740065285,
+      1 => 1740234559,
     ),
     'App\\Presentation\\Post\\PostPresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Post\\PostPresenter.php',
-      1 => 1740228234,
+      1 => 1740228998,
     ),
     'App\\Presentation\\Sign\\SignPresenter' => 
     array (

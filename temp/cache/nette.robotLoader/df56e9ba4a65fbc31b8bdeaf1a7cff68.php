@@ -12,6 +12,11 @@ return array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Core\\RouterFactory.php',
       1 => 1740066272,
     ),
+    'App\\Model\\PostManager' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Model\\PostManager.php',
+      1 => 1740234739,
+    ),
     'App\\Presentation\\Accessory\\LatteExtension' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Accessory\\LatteExtension.php',
@@ -30,7 +35,7 @@ return array (
     'App\\Presentation\\Home\\HomePresenter' => 
     array (
       0 => 'C:\\xampp\\htdocs\\nette-blog\\app\\Presentation\\Home\\HomePresenter.php',
-      1 => 1740065285,
+      1 => 1740234559,
     ),
     'App\\Presentation\\Post\\PostPresenter' => 
     array (
@@ -46,22 +51,12 @@ return array (
   1 => 
   array (
     'Nette\\Bridges\\Assets\\DIExtension' => 3,
+    'Nettey\\Application\\UI\\Presenter' => 2,
     'null' => 3,
-    'App\\Presentation\\Post\\PostShowTemplate' => 3,
-    'App\\Presentation\\Post\\PostTemplate' => 3,
-    'App\\Core\\Route' => 3,
-    'App\\Presentation\\PostPresenter' => 2,
-    'App\\Presentation\\Post\\Explorer' => 3,
-    'App\\Presentation\\Home\\HomeDefaultTemplate' => 3,
-    'App\\Presentation\\Home\\HomeTemplate' => 3,
-    'App\\Presentation\\Post\\PostCreateTemplate' => 3,
-    'App\\Presentation\\Post\\From' => 1,
-    'App\\Presentation\\Post\\PostEditTemplate' => 3,
-    'App\\Presentation\\Sign\\SignInTemplate' => 3,
-    'App\\Presentation\\Sign\\SignTemplate' => 3,
-    'App\\Presentation\\Sing\\SingPresenter' => 3,
-    'App\\Presentation\\Sign\\SignOutTemplate' => 3,
-    'App\\Presentation\\Homepage\\HomepagePresenter' => 1,
+    'Nette\\Model\\PostManager' => 3,
+    'Nette\\Datebase\\Explorer' => 3,
+    'App\\Presentation\\Home\\HomeDefaultTemplate' => 1,
+    'App\\Presentation\\Home\\HomeTemplate' => 1,
   ),
   2 => 
   array (

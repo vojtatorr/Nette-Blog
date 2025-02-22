@@ -64,6 +64,7 @@ class Container_9ad5e87f61 extends Nette\DI\Container
 		'Nette\Routing\Router' => [['01']],
 		'ArrayAccess' => [2 => ['01', 'application.1', 'application.3', 'application.4', 'application.5']],
 		'Nette\Application\Routers\RouteList' => [['01']],
+		'App\Model\PostManager' => [['02']],
 		'Nette\Application\UI\Presenter' => [2 => ['application.1', 'application.3', 'application.4', 'application.5']],
 		'Nette\Application\UI\Control' => [2 => ['application.1', 'application.3', 'application.4', 'application.5']],
 		'Nette\Application\UI\Component' => [2 => ['application.1', 'application.3', 'application.4', 'application.5']],
@@ -111,6 +112,12 @@ class Container_9ad5e87f61 extends Nette\DI\Container
 	}
 
 
+	public function createService02(): App\Model\PostManager
+	{
+		return new App\Model\PostManager($this->getService('database.default.explorer'));
+	}
+
+
 	public function createServiceApplication__1(): App\Presentation\Error\Error4xx\Error4xxPresenter
 	{
 		$service = new App\Presentation\Error\Error4xx\Error4xxPresenter;
@@ -136,7 +143,7 @@ class Container_9ad5e87f61 extends Nette\DI\Container
 
 	public function createServiceApplication__3(): App\Presentation\Home\HomePresenter
 	{
-		$service = new App\Presentation\Home\HomePresenter($this->getService('database.default.explorer'));
+		$service = new App\Presentation\Home\HomePresenter($this->getService('02'));
 		$service->injectPrimary(
 			$this->getService('http.request'),
 			$this->getService('http.response'),
