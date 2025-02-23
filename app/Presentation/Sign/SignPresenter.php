@@ -7,6 +7,13 @@ use Nette\Application\UI\Form;
 
 final class SignPresenter extends Nette\Application\UI\Presenter
 {
+	private string $storeRequestId = "";
+
+	public function actionIn(string $storeRequestId = ""){
+		$this->storeRequestId = $storeRequestId;
+	}
+
+
 	public function actionOut(){
 		$this->user->logout();
 		$this->flashMessage('Odhlšení proběhlo úspěšně.', 'success');
@@ -33,6 +40,7 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 	try {
 		$this->user->login($values->username, $values->password);
 		$this->flashMessage("Úspěšné příhlášeno.", "success");
+		$this->restoreRequest($this->storeRequestId);
 		$this->redirect('Home:');
 
 	} catch (Nette\Security\AuthenticationException $e) {
