@@ -15,27 +15,30 @@ class PostPresenter extends Presenter
         private PostManager $postManager,
 		private CommentManager $commentManager,
     ) { }
+  
+	public function actionManipulate(int $postId = 0): void
+	{
+		if (!$this->getUser()->isLoggedIn()){
+			$this->flashMessage("Pro tuto akci je nutné se přihlásit", "error");
+			$this->redirect("Sign:in");
+		}
 
-	public function actionCreate(){
-		$this->flashMessage('Pro tuto akci je nutné se přihlásit.', 'error');
-		$this->redirect('Sign:in');
+		if ($postId == 0){
+			return;
+		}
+
+		$post = $this->postManager->getById($postId);
+
+		if (!$post) {
+			$this->error('Omlouváme se, ale Vámi zvolený příspěvěk neexistuje!!!', 404);
+		}
+
+		$this['postForm']->setDefaults($post->toArray());
 	}
 
-	public function actionEdit(int $postId): void
-{
-	if (!$this->getUser()->isLoggedIn()){
-		$this->flashMessage("Pro tuto akci je nutné se přihlásit", "error");
-		$this->redirect("Sign:in");
+	public function renderManipulate(int $postId = 0){
+		$this->template->postId = $postId;
 	}
-
-	$post = $this->postManager->getById($postId);
-
-	if (!$post) {
-		$this->error('Post not found', 404);
-	}
-
-	$this['postForm']->setDefaults($post->toArray());
-}
 
     public function renderShow(int $postId): void
 	{
@@ -70,52 +73,52 @@ class PostPresenter extends Presenter
 	}
 
 	public function commentFormSucceeded(Form $form, \stdClass $values): void
-{
-	$postId = $this->getParameter('postId');
+	{
+		$postId = $this->getParameter('postId');
 
-	$this->commentManager->insert([
-		'post_id' => $postId,
-		'name' => $values->name,
-		'email' => $values->email,
-		'content' => $values->content,
-	]);
+		$this->commentManager->insert([
+			'post_id' => $postId,
+			'name' => $values->name,
+			'email' => $values->email,
+			'content' => $values->content,
+		]);
 
-	$this->flashMessage('Děkuji za komentář', 'success');
-	$this->redirect('this');
-}
-
-protected function createComponentPostForm(): Form
-{
-	$form = new Form;
-	$form->addText('title', 'Titulek:')
-		->setRequired();
-	$form->addTextArea('content', 'Obsah:')
-		->setRequired();
-
-	$form->addSubmit('send', 'Uložit a publikovat');
-	$form->onSuccess[] = $this->postFormSucceeded(...);
-
-	return $form;
-}
-
-private function postFormSucceeded(Form $form, array $values): void
-{
-	if (!$this->getUser()->isLoggedIn()){
-		$this->error("Pro tuto akci je nutné se přihlásit");
+		$this->flashMessage('Děkuji za komentář', 'success');
+		$this->redirect('this');
 	}
 
-	$postId = $this->getParameter("postId");
+	protected function createComponentPostForm(): Form
+		{
+			$form = new Form;
+			$form->addText('title', 'Titulek:')
+				->setRequired();
+			$form->addTextArea('content', 'Obsah:')
+				->setRequired();
 
-	if ($postId) {
-		$post = $this->postManager->getById($postId);
-		$post->update($values);
+			$form->addSubmit('send', 'Uložit a publikovat');
+			$form->onSuccess[] = $this->postFormSucceeded(...);
 
-	} else {
-		$post = $this->postManager->insert($values);
-	}
+			return $form;
+		}
 
-	$this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
-	$this->redirect('Post:show', $post->id);
-}
+	public function postFormSucceeded(Form $form, array $values): void
+		{
+			if (!$this->getUser()->isLoggedIn()){
+				$this->error("Pro vytvoření, nebo aditováání příspěvku se musíte přihlásit.");
+			}
+
+			$postId = $this->getParameter("postId");
+
+			if ($postId) {
+				$post = $this->postManager->getById($postId);
+				$post->update($values);
+
+			} else {
+				$post = $this->postManager->insert($values);
+			}
+
+			$this->flashMessage('Příspěvek byl úspěšně publikován.', 'success');
+			$this->redirect('Post:show', $post->id);
+		}
 
 }
