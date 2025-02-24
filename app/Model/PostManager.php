@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use Latte\Engine;
 use Nette\Database\Explorer;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
+use Nette\Mail\Message;
+use Nette\Mail\SendmailMailer;
 use Nette\SmartObject;
 use Nette\Utils\DateTime;
-use Nette\Database\Table\ActiveRow;
+use Tracy\Debugger;
 
 class PostManager
 {
@@ -16,7 +20,12 @@ class PostManager
 
     public function __construct(
         private Explorer $db,
-    ) { }
+        TemplateFactory $templateFactory,
+        LinkGenerator $linkGenerator,
+    ) { 
+        $this->templateFactory = $templateFactory;
+        $this->linkGenerator = $linkGenerator;
+    }
 
     public function getAll(): Selection
     {
@@ -35,12 +44,14 @@ class PostManager
         // Mail sent START
 
         if (Debugger::$productionMode){
+            $latte = $this->templateFactory->createTemplate();
+            $latte->getLatte()->addProvider("uiControl", $this->linkGenerator);
+
             $message = new Message();
             $message->setFrom("JohnDoe@gmail.com");
             $message->addTo("default@news.cz");
     
-            $message->setSubject("Byl přidán nový článek.");
-            $message->setHtmlBody("<h2>Na Vašem webu byl přidán nový článek.</h2><p>Právě na Vašem webu přibyl nový článek s názvem " . $values["title"] . "</p>");
+            $message->setHtmlBody($latte->renderToString(__DIR__ . "/addPostMail.latte", $retVal->toArray()));
     
             $sender = new SendmailMailer();
             $sender->send($message);
