@@ -18,7 +18,6 @@ class PostPresenter extends Presenter
   
 	public function actionManipulate(int $postId = 0): void
 	{
-		$this->canonicalize('Post:manipulate', ['postId' => $postId]);
 
 		if (!$this->getUser()->isLoggedIn()){
 			$this->flashMessage("Pro tuto akci je nutné se přihlásit", "error");

@@ -30,7 +30,25 @@ class PostManager
 
     public function insert(array $values): ActiveRow 
     {
-        return $this->getAll()->insert($values);
+        $retVal = $this->getAll()->insert($values);
+
+        // Mail sent START
+
+        if (Debugger::$productionMode){
+            $message = new Message();
+            $message->setFrom("JohnDoe@gmail.com");
+            $message->addTo("default@news.cz");
+    
+            $message->setSubject("Byl přidán nový článek.");
+            $message->setHtmlBody("<h2>Na Vašem webu byl přidán nový článek.</h2><p>Právě na Vašem webu přibyl nový článek s názvem " . $values["title"] . "</p>");
+    
+            $sender = new SendmailMailer();
+            $sender->send($message);
+        }
+
+        //Mail send END
+
+
     }
 
     public function getPublicPosts(int $limit = null): Selection
