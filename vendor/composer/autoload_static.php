@@ -15,6 +15,10 @@ class ComposerStaticInit9c49a418f02ffb235919088891200a26
         array (
             'Symfony\\Thanks\\' => 15,
         ),
+        'N' => 
+        array (
+            'Nextras\\Migrations\\' => 19,
+        ),
         'A' => 
         array (
             'App\\' => 4,
@@ -25,6 +29,10 @@ class ComposerStaticInit9c49a418f02ffb235919088891200a26
         'Symfony\\Thanks\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/thanks/src',
+        ),
+        'Nextras\\Migrations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextras/migrations/src',
         ),
         'App\\' => 
         array (
@@ -640,6 +648,12 @@ class ComposerStaticInit9c49a418f02ffb235919088891200a26
         'Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
+        'Nextras\\Migrations\\Exception' => __DIR__ . '/..' . '/nextras/migrations/src/exceptions.php',
+        'Nextras\\Migrations\\ExecutionException' => __DIR__ . '/..' . '/nextras/migrations/src/exceptions.php',
+        'Nextras\\Migrations\\IOException' => __DIR__ . '/..' . '/nextras/migrations/src/exceptions.php',
+        'Nextras\\Migrations\\LockException' => __DIR__ . '/..' . '/nextras/migrations/src/exceptions.php',
+        'Nextras\\Migrations\\LogicException' => __DIR__ . '/..' . '/nextras/migrations/src/exceptions.php',
+        'Nextras\\Migrations\\RuntimeException' => __DIR__ . '/..' . '/nextras/migrations/src/exceptions.php',
         'Tester\\Assert' => __DIR__ . '/..' . '/nette/tester/src/Framework/Assert.php',
         'Tester\\AssertException' => __DIR__ . '/..' . '/nette/tester/src/Framework/AssertException.php',
         'Tester\\CodeCoverage\\Collector' => __DIR__ . '/..' . '/nette/tester/src/CodeCoverage/Collector.php',

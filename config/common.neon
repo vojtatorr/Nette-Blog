@@ -30,3 +30,13 @@ di:
 security:
 	users:
 		admin: secret  # user 'admin', password 'secret'
+
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+
+migrations:
+	dir: %appDir%/migrations # migrations base directory
+	driver: mysql               # pgsql or mysql
+	dbal: nette               # nextras, nette, doctrine or dibi
+	withDummyData: %debugMode%
