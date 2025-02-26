@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Latte\Engine;
+use Nette\Application\LinkGenerator;
+use Nette\Application\UI\TemplateFactory;
 use Nette\Database\Explorer;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
@@ -14,32 +15,26 @@ use Nette\SmartObject;
 use Nette\Utils\DateTime;
 use Tracy\Debugger;
 
-class PostManager
+class PostManager extends BaseManager
 {
     use SmartObject;
 
     public function __construct(
-        private Explorer $db,
-        TemplateFactory $templateFactory,
-        LinkGenerator $linkGenerator,
+        Explorer $db,
+        private TemplateFactory $templateFactory,
+        private LinkGenerator $linkGenerator,
     ) { 
-        $this->templateFactory = $templateFactory;
-        $this->linkGenerator = $linkGenerator;
+        parent::__construct($db);
     }
 
-    public function getAll(): Selection
+    public function getTableName(): string
     {
-        return $this->db->table('post');
+        return "post";
     }
-
-    public function getById(int $id): ?ActiveRow
-{
-    return $this->getAll()->get($id);
-}
 
     public function insert(array $values): ActiveRow 
     {
-        $retVal = $this->getAll()->insert($values);
+        $retVal = parent::insert($values);
 
         // Mail sent START
 
@@ -64,14 +59,9 @@ class PostManager
 
     public function getPublicPosts(int $limit = null): Selection
     {
-        $retVal = $this->getAll()
+        return $this->getAll()
             ->where('created_at < ', new DateTime)
-            ->order('created_at DESC');
-
-		if ($limit){
-			$retVal->limit($limit);
-		}
-
-		return $retVal;
+            ->order('created_at DESC')
+            ->limit($limit);
     }
 }
