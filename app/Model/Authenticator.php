@@ -15,6 +15,7 @@ class Authenticator implements A
 {
     public function __construct(
         private UserManager $userManager,
+        private RoleManager $roleManager,
         private Passwords $passwords,
     ) { }
 
@@ -40,7 +41,7 @@ class Authenticator implements A
 
 		return new SimpleIdentity(
 			$row->id,
-			"", // nebo pole více rolí
+			$this->roleManager->findByUserIdSelect($row->id), // nebo pole více rolí
 			$user
 		);
 	}

@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Presentation\Home;
 
 use Nette;
-use App\Model\PostManager;  // Correct namespace
+use App\Model\PostManager;
 use Nette\Application\UI\Presenter;
 
 final class HomePresenter extends Presenter
 {
     public function __construct(
-        private PostManager $postManager
+        private PostManager $postManager,
     ) { }
 
     public function renderDefault() 

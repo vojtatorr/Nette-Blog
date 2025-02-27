@@ -2,6 +2,8 @@ services:
 	- App\Core\RouterFactory::createRouter
 	- App\Model\PostManager
 	- App\Model\CommentManager
+	- App\Model\RoleManager
+	- App\Model\UserManager
 
 
 search:
