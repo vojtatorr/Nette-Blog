@@ -10,4 +10,11 @@ class UseManager extends BaseMangar
     {
         return "user";
     }
+
+    public function getByEmail(): ?ActiveRow
+    {
+        return $this->getAll()
+            ->where("email", $email)
+            ->fetch();
+    }
 }
