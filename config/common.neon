@@ -27,10 +27,6 @@ di:
 		parameters: no
 		tags: no
 
-security:
-	users:
-		admin: secret  # user 'admin', password 'secret'
-
 extensions:
 	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
