@@ -4,12 +4,16 @@ namespace App\Presentation\Sign;
 use Nette;
 use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;
+use App\Components\User\Sign\In\FormFactory;
 
 final class SignPresenter extends Nette\Application\UI\Presenter
 {
+	private FormFactory $userSignInFormFactory;
+
 	private string $storeRequestId = "";
 
-	public function actionIn(string $storeRequestId = ""){
+	public function actionIn(string $storeRequestId = "")
+	{
 		$this->storeRequestId = $storeRequestId;
 	}
 
@@ -22,29 +26,18 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 
 	protected function createComponentSignInForm(): Form
 	{
-		$form = new Form;
-		$form->addText('username', 'Uživatelské jméno:')
-			->setRequired('Prosím vyplňte své uživatelské jméno.');
+		$form = $this->userSignInFormFactory->create();
 
-		$form->addPassword('password', 'Heslo:')
-			->setRequired('Prosím vyplňte své heslo.');
+		$form->onSuccess[] = [$this, "onSignInFormSuccess"];
 
-		$form->addSubmit('send', 'Přihlásit');
-
-		$form->onSuccess[] = [$this, 'signInFormSucceeded'];
 		return $form;
 	}
 
-	public function signInFormSucceeded(Form $form, \stdClass $values): void
-{
-	try {
-		$this->user->login($values->username, $values->password);
-		$this->flashMessage("Úspěšné příhlášeno.", "success");
+	public function onSignInFormSuccess(): void
+	{
+		$this->flashMessage("Úspěšně přihlášeno.", "success");
 		$this->restoreRequest($this->storeRequestId);
-		$this->redirect('Home:');
-
-	} catch (Nette\Security\AuthenticationException $e) {
-		$form->addError('Nesprávné přihlašovací jméno nebo heslo.');
+		$this->redirect("Home:");
 	}
-}
+
 }
