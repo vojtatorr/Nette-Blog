@@ -2,6 +2,8 @@
 namespace App\Presentation\Sign;
 
 use Nette;
+use App\Components\User\Sign\In\Control as MyControl;
+use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Form;
 use App\Components\User\Sign\In\FormFactory;
@@ -24,13 +26,9 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 		$this->redirect('Home:');
 	}
 
-	protected function createComponentSignInForm(): Form
+	protected function createComponentSignInForm(): Control
 	{
-		$form = $this->userSignInFormFactory->create();
-
-		$form->onSuccess[] = [$this, "onSignInFormSuccess"];
-
-		return $form;
+		return new MyControl($this->userSignInFormFactory, [$this, "onSignInFormSuccess"]);
 	}
 
 	public function onSignInFormSuccess(): void
