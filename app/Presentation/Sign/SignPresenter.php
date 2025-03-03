@@ -3,14 +3,13 @@ namespace App\Presentation\Sign;
 
 use Nette;
 use App\Components\User\Sign\In\Control as MyControl;
+use App\Components\User\Sign\In\ControlFactory;
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
-use Nette\Application\UI\Form;
-use App\Components\User\Sign\In\FormFactory;
 
-final class SignPresenter extends Nette\Application\UI\Presenter
+class SignPresenter extends Nette\Application\UI\Presenter
 {
-	private FormFactory $userSignInFormFactory;
+	private ControlFactory $userSignInControlFactory;
 
 	private string $storeRequestId = "";
 
@@ -28,7 +27,7 @@ final class SignPresenter extends Nette\Application\UI\Presenter
 
 	protected function createComponentSignInForm(): Control
 	{
-		return new MyControl($this->userSignInFormFactory, [$this, "onSignInFormSuccess"]);
+		return $this->userSignInControlFactory->create([$this, "onSignInFormSuccess"]);
 	}
 
 	public function onSignInFormSuccess(): void
