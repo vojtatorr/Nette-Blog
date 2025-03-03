@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Presentation\Post;
 
-use Nette\Application\UI\Presenter;
+
 use App\Model\PostManager;
 use App\Model\CommentManager;
 use Nette\Application\UI\Form;
 
-class PostPresenter extends Presenter
+class PostPresenter extends BasePresenter
 {
     public function __construct(
         private PostManager $postManager,

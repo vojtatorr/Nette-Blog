@@ -6,9 +6,8 @@ namespace App\Presentation\Home;
 
 use Nette;
 use App\Model\PostManager;
-use Nette\Application\UI\Presenter;
 
-final class HomePresenter extends Presenter
+final class HomePresenter extends BasePresenter
 {
     public function __construct(
         private PostManager $postManager,
